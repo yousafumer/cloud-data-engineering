@@ -15,7 +15,9 @@
 
 -- Write your query below:
 
-
+Select first_name, last_name , phone ,state
+From sales.customers
+Where state='CA' and phone is Not null
 
 
 -- ============================================================
@@ -28,7 +30,9 @@
 
 -- Write your query below:
 
-
+select product_id, product_name, model_year, list_price
+From production.products
+order by model_year DESC , list_price ASC
 
 
 -- ============================================================
@@ -41,12 +45,17 @@
 -- ============================================================
 
 -- Part a:
-
+Select Top 5 Product_name, list_price
+From production.products
+order by list_price DESC
 
 -- Part b:
 
+Select Top 5 Percent Product_name, list_price
+From production.products
+order by list_price
 
-
+-- total 17 rows are there which is 5 % 
 
 -- ============================================================
 --  Question 4 — OFFSET & FETCH (Pagination)
@@ -60,12 +69,28 @@
 
 -- Page 1:
 
+Select *
+From production.products
+order by list_price DESC
+OFFSET  0 rows
+Fetch next 10 rows only
+
 
 -- Page 2:
 
+Select *
+From production.products
+order by list_price DESC
+OFFSET  10 rows
+Fetch next 10 rows only
 
 -- Page 3:
 
+Select *
+From production.products
+order by list_price DESC
+OFFSET  20 rows
+Fetch next 10 rows only
 
 
 
@@ -82,14 +107,22 @@
 
 -- Part a:
 
+select distinct (State),first_name, customer_id , customer_id
+From Sales.customers
+Where Customer_id is not null
+order by first_name ASC
 
 -- Part b:
-
+select distinct state, city
+From sales.customers
+order by state ASC , City ASC
 
 -- Part c:
 
+select count(distinct model_year )
+From production.products
 
-
+-- There are total 4 unique years
 
 -- ============================================================
 --  Question 6 — Logical Operators (AND / OR)
@@ -103,3 +136,7 @@
 -- ============================================================
 
 -- Write your query below:
+
+Select product_id, product_name, list_price,brand_id, category_id
+From production.products
+Where (list_price between 500 and 1500) and model_year = 2019 or model_year = 2020
